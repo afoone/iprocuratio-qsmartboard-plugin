@@ -20,9 +20,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.Properties;
 import ru.apertum.qsystem.server.controller.AIndicatorBoard;
 
@@ -32,18 +31,23 @@ import ru.apertum.qsystem.server.controller.AIndicatorBoard;
  */
 public class PrintRecords {
 
-    String topSize = "0px";
-    String topUrl = "";
-    String leftSize = "0px";
-    String leftUrl = "";
-    String rightSize = "0px";
-    String rightUrl = "";
-    String bottomSize = "0px";
-    String bottomUrl = "";
+    private int linesCount = 6;
+    private String topSize = "0px";
+    private String topUrl = "";
+    private String leftSize = "0px";
+    private String leftUrl = "";
+    private String rightSize = "0px";
+    private String rightUrl = "";
+    private String bottomSize = "0px";
+    private String bottomUrl = "";
 
-    String columnFirst = "Clients column";
-    String columnSecond = "To point";
-    String columnExt = "Ext column";
+    private String columnFirst = "Clients column";
+    private String columnSecond = "To point";
+    private String columnExt = "Ext column";
+
+    public int getLinesCount() {
+        return linesCount;
+    }
 
     public String getTopSize() {
         return topSize;
@@ -105,6 +109,7 @@ public class PrintRecords {
                 throw new RuntimeException("Cant read version. " + ex);
             }
 
+            linesCount = Integer.parseInt(settings.getProperty("lines_count", "6"));
             topSize = settings.getProperty("top.size").matches("^-?\\d+(%|px)$") ? settings.getProperty("top.size") : "0px";
             topUrl = settings.getProperty("top.url");
             leftSize = settings.getProperty("left.size").matches("^-?\\d+(%|px)$") ? settings.getProperty("left.size") : "0px";
@@ -130,16 +135,16 @@ public class PrintRecords {
         private static final PrintRecords INSTANCE = new PrintRecords();
     }
 
-    private LinkedHashSet<AIndicatorBoard.Record> records = new LinkedHashSet<>();
+    private LinkedList<AIndicatorBoard.Record> records = new LinkedList<>();
 
-    public LinkedHashSet<AIndicatorBoard.Record> getRecords() {
+    public LinkedList<AIndicatorBoard.Record> getRecords() {
         return records;
     }
 
-    public void setRecords(LinkedHashSet<AIndicatorBoard.Record> records) {
+    public void setRecords(LinkedList<AIndicatorBoard.Record> records) {
         this.records = records;
     }
-    
+
     private boolean invited;
 
     public boolean isInvited() {
@@ -149,6 +154,5 @@ public class PrintRecords {
     public void setInvited(boolean invited) {
         this.invited = invited;
     }
-    
 
 }

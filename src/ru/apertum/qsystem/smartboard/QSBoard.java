@@ -16,7 +16,7 @@
  */
 package ru.apertum.qsystem.smartboard;
 
-import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import org.dom4j.Element;
 import ru.apertum.qsystem.client.forms.AFBoardRedactor;
 import ru.apertum.qsystem.common.QLog;
@@ -31,7 +31,12 @@ import ru.apertum.qsystem.server.model.QUser;
 public class QSBoard extends AIndicatorBoard {
 
     @Override
-    protected void showOnBoard(LinkedHashSet<Record> records) {
+    public Integer getLinesCount() {
+        return PrintRecords.getInstance().getLinesCount();
+    }
+
+    @Override
+    protected void showOnBoard(LinkedList<Record> records) {
         QLog.l().logger().debug("QSmartboardPlugin: showOnBoard " + records.toString());
         PrintRecords.getInstance().setRecords(records);
     }
@@ -63,7 +68,7 @@ public class QSBoard extends AIndicatorBoard {
     @Override
     public void clear() {
         records.clear();
-        showOnBoard(new LinkedHashSet(records.values()));
+        showOnBoard(new LinkedList(records.values()));
     }
 
     @Override
@@ -89,6 +94,12 @@ public class QSBoard extends AIndicatorBoard {
     @Override
     public long getUID() {
         return Version.UID;
+    }
+
+    @Override
+    public Object getBoardForm() {
+        System.out.println("Strange! Strange! Strange! Strange! Strange!");
+        return null;
     }
 
 }
