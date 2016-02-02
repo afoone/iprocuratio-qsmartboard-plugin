@@ -1,10 +1,10 @@
-Плагин для предоставления данных в табло в виде war-плагина QSmartboard.
+Plugin for display of data in the form of war-plugin QSmartboard.
 
-Этому плагину нужен файл конфигурации, из которого подтянутся некоторые настройки для главного табло.
+This plugin needs a configuration file from which it will catch some of the settings for the main display.
 
-Плагин и табло: QSmartboardPlugin.jar, qsmartboard.war
-Положить, соответственно, в папку с плагинами и www/war:
+Plugin and ScoreBoard: QSmartboardPlugin.jar, qsmartboard.war
+Put respectively in the plug-ins folder and www/war:
     QSmartboardPlugin.jar -> <qsystem>/plugins
 	qsmartboard.war -> <qsystem>/www/war
 
-Нстройка плагинта: взять файлик QSmartboardPlugin.properties и отправить его в <qsystem>/config/. Можно там что-нибудь изменить, при желании.
+Setting plugin: take a file QSmartboardPlugin.properties and send it to <qsystem>/config/. Can change anything if desired.
